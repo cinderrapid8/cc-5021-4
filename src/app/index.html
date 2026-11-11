@@ -67,6 +67,26 @@
       <div id="check-result" class="mono small">尚未运行</div>
     </details>
 
+    <details open>
+      <summary>蒙皮追踪（逐顶点诊断）</summary>
+      <div class="row">
+        <button id="btn-trace-vertex">追踪选中顶点</button>
+        <button id="btn-scan-mesh">扫描网格异常</button>
+      </div>
+      <div id="trace-result" class="mono small">尚未追踪</div>
+      <div id="scan-result" class="mono small"></div>
+      <div class="row"><button id="btn-run-probes">运行扭转 / 缩放探针</button></div>
+      <div id="probe-result" class="mono small">探针未运行</div>
+      <div class="row">
+        <button id="btn-export-replay">导出重放包</button>
+        <button id="btn-rerun-replay">复跑重放</button>
+      </div>
+      <textarea id="replay-text" rows="5" spellcheck="false"
+        placeholder="重放包 JSON —— 导出后可存档；粘贴后点“复跑重放”重放同一批顶点的蒙皮证据链并核对 digest"></textarea>
+      <div id="replay-result" class="mono small"></div>
+      <div id="trace-log" class="mono small"></div>
+    </details>
+
     <details>
       <summary>检视配置（保存 / 复现）</summary>
       <div class="row">

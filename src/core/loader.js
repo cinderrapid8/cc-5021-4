@@ -160,6 +160,7 @@ export function loadAsset(json) {
       weights: weightResult.weights,
       indices,
       zeroInfluence: weightResult.zeroInfluence,
+      weightRepairs: weightResult.repairs,
     },
     animations,
     warnings,

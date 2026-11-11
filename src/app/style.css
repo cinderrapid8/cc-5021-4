@@ -90,13 +90,17 @@ textarea {
 .warn { color: #e2b93d; }
 .err { color: #e5534b; }
 .ok { color: #57ab5a; }
-#vertex-info table, #check-result table {
+#vertex-info table, #check-result table, #trace-result table, #scan-result table {
   border-collapse: collapse;
   width: 100%;
 }
-#vertex-info td, #vertex-info th, #check-result td, #check-result th {
+#vertex-info td, #vertex-info th, #check-result td, #check-result th,
+#trace-result td, #trace-result th, #scan-result td, #scan-result th {
   border: 1px solid #2a2e36;
   padding: 2px 6px;
   text-align: right;
 }
-#vertex-info th, #check-result th { color: #9ecbff; text-align: left; }
+#vertex-info th, #check-result th, #trace-result th, #scan-result th { color: #9ecbff; text-align: left; }
+#trace-result, #scan-result, #probe-result, #replay-result { white-space: pre-wrap; }
+.scan-v { color: #9ecbff; }
+#trace-log { color: #8a8f98; margin-top: 6px; }

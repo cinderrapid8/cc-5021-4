@@ -36,13 +36,17 @@ function fmtList(arr) {
 
 // Validates and repairs skin weights in place (on a float64 copy).
 // joints: Uint16Array-like [vertexCount*4], weights: Float32Array-like [vertexCount*4]
-// Returns { weights: Float32Array, joints, warnings, zeroInfluence: number[] }
+// Returns { weights: Float32Array, joints, warnings, zeroInfluence: number[],
+//           repairs: { clamped, rescaled, merged } }
+// `repairs` lists the exact vertices each repair was applied to, so diagnostics
+// can link a vertex back to the load-stage weight normalization (evidence chain).
 export function validateWeights(joints, weights, vertexCount, jointCount) {
   const errors = [];
   const warnings = [];
   const badIndexVerts = [];
   const nanVerts = [];
   const negVerts = [];
+  const clampedVerts = [];
   const rescaledVerts = [];
   const mergedVerts = [];
   const zeroInfluence = [];
@@ -72,9 +76,11 @@ export function validateWeights(joints, weights, vertexCount, jointCount) {
     if (hasBadIndex) { badIndexVerts.push(v); continue; }
 
     // clamp tiny negatives
+    let clamped = false;
     for (let k = 0; k < MAX_INFLUENCES; k++) {
-      if (w[o + k] < 0) w[o + k] = 0;
+      if (w[o + k] < 0) { w[o + k] = 0; clamped = true; }
     }
+    if (clamped) clampedVerts.push(v);
 
     // merge duplicate joints (sum weights into first occurrence)
     let merged = false;
@@ -126,7 +132,13 @@ export function validateWeights(joints, weights, vertexCount, jointCount) {
     warnings.push(`${zeroInfluence.length} zero-influence vertex(es) stay rigid to the mesh node: ${fmtList(zeroInfluence)}`);
   }
 
-  return { joints: j, weights: w, warnings, zeroInfluence };
+  return {
+    joints: j,
+    weights: w,
+    warnings,
+    zeroInfluence,
+    repairs: { clamped: clampedVerts, rescaled: rescaledVerts, merged: mergedVerts },
+  };
 }
 
 // Rejects non-finite data in any numeric payload. name is used in the error.
