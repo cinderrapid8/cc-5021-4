@@ -1,0 +1,23 @@
+{
+  "name": "runway-skinning-inspector",
+  "version": "1.0.0",
+  "description": "服装走秀角色蒙皮检视器：GPU 线性混合蒙皮 + CPU 参考数值核对",
+  "main": "index.js",
+  "scripts": {
+    "test": "node test/run.mjs",
+    "gen": "node tools/gen_assets.mjs",
+    "serve": "node tools/serve.mjs"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/cinderrapid8/cc-5021-4.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/cinderrapid8/cc-5021-4/issues"
+  },
+  "homepage": "https://github.com/cinderrapid8/cc-5021-4#readme",
+  "type": "module"
+}

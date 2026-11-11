@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<title>服装走秀角色蒙皮检视器</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<main id="layout">
+  <section id="viewport">
+    <canvas id="glcanvas"></canvas>
+    <div id="viewport-hint">拖拽旋转 · 滚轮缩放 · 点击拾取顶点</div>
+  </section>
+  <aside id="panel">
+    <h1>蒙皮检视器</h1>
+
+    <details open>
+      <summary>资产</summary>
+      <div class="row">
+        <button id="btn-load-default">加载内置走秀角色</button>
+        <label class="file-label">打开 .rskin.json<input type="file" id="file-asset" accept=".json"></label>
+      </div>
+      <div id="asset-info" class="mono small">未加载</div>
+      <div id="validation-report" class="mono small"></div>
+    </details>
+
+    <details open>
+      <summary>动画</summary>
+      <div class="row">
+        <select id="sel-clip"></select>
+        <button id="btn-play">暂停</button>
+      </div>
+      <div class="row">
+        <input type="range" id="slider-time" min="0" max="1" step="0.001" value="0">
+        <span id="label-time" class="mono">0.000</span>
+      </div>
+    </details>
+
+    <details open>
+      <summary>视图</summary>
+      <div class="row">
+        <select id="sel-colormode">
+          <option value="0">着色</option>
+          <option value="1">关节权重热力图</option>
+          <option value="2">CPU/GPU 误差热力图</option>
+        </select>
+        <select id="sel-heatjoint"></select>
+      </div>
+      <div class="row">
+        <label><input type="checkbox" id="chk-skeleton" checked> 骨架</label>
+        <label><input type="checkbox" id="chk-continuous"> 连续核对</label>
+      </div>
+    </details>
+
+    <details open>
+      <summary>顶点检视</summary>
+      <div class="row">
+        <input type="number" id="input-vertex" min="0" placeholder="顶点索引">
+        <button id="btn-goto-vertex">选择</button>
+      </div>
+      <div id="vertex-info" class="mono small">未选择顶点</div>
+    </details>
+
+    <details open>
+      <summary>GPU ↔ CPU 数值核对</summary>
+      <div class="row"><button id="btn-check">运行核对</button></div>
+      <div id="check-result" class="mono small">尚未运行</div>
+    </details>
+
+    <details>
+      <summary>检视配置（保存 / 复现）</summary>
+      <div class="row">
+        <button id="btn-save-config">导出配置</button>
+        <button id="btn-load-config">导入配置</button>
+      </div>
+      <textarea id="config-text" rows="6" spellcheck="false"
+        placeholder="配置 JSON —— 导出后可存档，粘贴后点“导入配置”即可复现同一检视状态"></textarea>
+    </details>
+  </aside>
+</main>
+<script type="module" src="main.js"></script>
+</body>
+</html>
